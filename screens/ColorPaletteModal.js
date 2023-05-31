@@ -31,17 +31,12 @@ const ColorPaletteModal = ( { navigation, route } ) => {
                 colors: paletteColorNames.map( colorName => COLORS.find( color => colorName === color.colorName ) )
             },
             ];
-            // route.params.setArray( newPaletteArray );
-            // console.log( newPaletteArray );
             navigation.navigate( {
                 name: 'Home',
                 params: { array: newPaletteArray },
                 merge: true,
             } );
         }
-
-
-
     };
 
     return (

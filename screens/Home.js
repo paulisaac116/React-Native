@@ -18,19 +18,15 @@ const Home = ( { navigation, route } ) => {
     }, [route.params?.array] );
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.mainContainer}>
             <View>
                 <Button
                     title='Add a color scheme'
                     onPress={() => navigation.navigate( 'ColorPaletteModal' )}
                 />
-                {/* <Switch
-                    value={isEnabled}
-                    onValueChange={setIsEnabled}
-                /> */}
             </View>
             <View>
-                <Text>Your own Palette Color</Text>
+                <Text style={{ color: 'black' }}>Your own Palette Color</Text>
             </View>
             <FlatList
                 data={paletteArray}
@@ -67,6 +63,9 @@ const Home = ( { navigation, route } ) => {
 };
 
 const styles = StyleSheet.create( {
+    mainContainer: {
+        backgroundColor: 'white',
+    },
     loading: {
         color: 'black',
         fontSize: 18,
