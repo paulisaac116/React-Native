@@ -13,9 +13,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ColorPalette from './screens/ColorPalette';
 import Home from './screens/Home';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import ColorPaletteModal from './screens/ColorPaletteModal';
 
 // create the screens to navigate in a stack
-const Stack = createStackNavigator();
+const RootStack = createStackNavigator();
+const MainStack = createStackNavigator()
+
+const MainStackScreen = () => {
+  return (
+    <MainStack.Navigator>
+      <MainStack.Screen name='Home' component={Home} />
+      <MainStack.Screen name='ColorPalette' component={ColorPalette} options={({ route }) => ({ title: route?.params?.paletteName ?? '' })} />
+    </MainStack.Navigator>
+  )
+}
 
 const client = new QueryClient();
 
@@ -36,10 +47,14 @@ function App(): JSX.Element {
   return (
     <QueryClientProvider client={client}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='Home' component={Home} />
-          <Stack.Screen name='ColorPalette' component={ColorPalette} options={({ route }) => ({ title: route?.params?.paletteName ?? '' })} />
-        </Stack.Navigator>
+        <RootStack.Navigator screenOptions={{ presentation: 'card' }}>
+          <RootStack.Screen
+            name='Main'
+            component={MainStackScreen}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen name='ColorPaletteModal' component={ColorPaletteModal} options={{ title: 'Add a color scheme' }} />
+        </RootStack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
   );
